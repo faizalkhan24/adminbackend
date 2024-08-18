@@ -1,37 +1,35 @@
 const mongoose = require('mongoose');
 
-// Define the Review schema
 const ReviewSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        trim: true, // Trim whitespace from name
+        trim: true, 
     },
     email: {
         type: String,
         required: true,
         unique: true,
-        lowercase: true, // Store email in lowercase
-        match: [/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/, 'Invalid email format'], // Email format validation
+        lowercase: true,
+        match: [/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/, 'Invalid email format'], 
     },
     rating: {
         type: Number,
         required: true,
-        min: 1, // Minimum rating value
-        max: 5, // Maximum rating value
+        min: 1,
+        max: 5,
     },
     comment: {
         type: String,
         required: true,
-        trim: true, // Trim whitespace from comment
+        trim: true,
     },
     date: {
         type: Date,
         default: Date.now,
     },
 }, {
-    timestamps: true, // Automatically add createdAt and updatedAt fields
+    timestamps: true,
 });
 
-// Create the Review model
 module.exports = mongoose.model('Review', ReviewSchema);

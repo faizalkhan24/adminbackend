@@ -22,11 +22,14 @@ app.get('/', (req, res) => {
 // Route imports
 const reviewRoutes = require('./routes/reviewRoutes');
 const blogRoutes = require('./routes/blogRoutes');
+const projectRoutes = require('./routes/projectsRoutes');
+
 const authRoutes = require('./routes/authRoutes');
 
 // Use Routes
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/blogs', blogRoutes);
+app.use('/api/projects', projectRoutes);
 app.use('/api/auth', authRoutes);
 
 // Protect Routes

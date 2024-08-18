@@ -1,16 +1,11 @@
 const Blog = require("../models/Blog");
 
-// Create a new blog post
 const createBlog = async (req, res) => {
   try {
-    // Extract blog details from request body
     const { title, content, author, tags } = req.body;
-
-    // Handle file uploads
     const image = req.files?.image ? req.files.image[0].path : null;
     const video = req.files?.video ? req.files.video[0].path : null;
 
-    // Create a new blog post
     const blog = new Blog({
       title,
       content,
@@ -20,7 +15,6 @@ const createBlog = async (req, res) => {
       video,
     });
 
-    // Save blog to the database
     await blog.save();
     res.status(201).json(blog);
   } catch (error) {
@@ -29,16 +23,13 @@ const createBlog = async (req, res) => {
   }
 };
 
-// Get all blog posts with optional pagination
 const getBlogs = async (req, res) => {
   try {
-    const { page = 1, limit = 10 } = req.query; // Default to page 1 and limit 10
-
-    // Fetch blogs with pagination and sorting
+    const { page = 1, limit = 10 } = req.query; 
     const blogs = await Blog.find()
       .skip((page - 1) * limit)
       .limit(parseInt(limit))
-      .sort({ date: -1 }); // Sort by date descending
+      .sort({ date: -1 }); 
 
     res.status(200).json(blogs);
   } catch (error) {
@@ -47,7 +38,6 @@ const getBlogs = async (req, res) => {
   }
 };
 
-// Get a single blog post by ID
 const getBlogById = async (req, res) => {
   try {
     // Fetch a single blog post by ID
